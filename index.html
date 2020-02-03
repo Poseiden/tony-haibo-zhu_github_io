@@ -5,17 +5,17 @@
   
 
   
-  <title>Hexo</title>
+  <title>朱海波的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="朱海波的个人博客">
 <meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="朱海波的个人博客">
 <meta property="og:locale" content="en_US">
-<meta property="article:author" content="John Doe">
+<meta property="article:author" content="hbzhu">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="朱海波的个人博客" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -36,7 +36,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
+        <a href="/" id="logo">朱海波的个人博客</a>
       </h1>
       
     </div>
@@ -91,25 +91,183 @@
 <p>演进式架构支持跨多个维度的引导性增量变更。                ——《演进式架构》</p>
 </blockquote>
 <p>这是本书在第一章第一节对 <strong><em>演进式架构</em></strong> 的作用做出的简洁定义。而在通篇读完这本书后，发现 <strong><em>演进式架构</em></strong> 中的三个重要元素则为 <strong><em>“增量式变更”</em></strong>，<strong><em>“适应度函数”</em></strong> 以及 <strong><em>“适当的耦合”</em></strong>。那么我们接下来将以几个问题来简要分析，何为 <strong><em>演进式架构</em></strong></p>
-<blockquote>
-<p><strong><em>以下均为个人心得和理解，如有不同意见和观点，欢迎一起探讨</em></strong></p>
-</blockquote>
-<h3 id="演进式架构就是一种架构风格么？（不是指具体哪种架构模式，例如微服务，SOA，单体等等）"><a href="#演进式架构就是一种架构风格么？（不是指具体哪种架构模式，例如微服务，SOA，单体等等）" class="headerlink" title="演进式架构就是一种架构风格么？（不是指具体哪种架构模式，例如微服务，SOA，单体等等）"></a>演进式架构就是一种架构风格么？（不是指具体哪种架构模式，例如微服务，SOA，单体等等）</h3><p>是的，起初在我还没翻开这本书时，以为演进式架构是一种新的架构模式，它不同与微服务，单体等。但通读完本书才明白，<strong>“演进”</strong> 只是一种能力，任何架构模式都具有此种能力，（没错，就连 <strong>*”Big Mud”*</strong> 也不例外），区别在于能里的高低。而本书第四章，则对常见的几种架构模式的 <strong>“演进能力”</strong> 进行了详细分析。</p>
-<h3 id="所谓增量变更就是小步提交和持续集成-部署吗？"><a href="#所谓增量变更就是小步提交和持续集成-部署吗？" class="headerlink" title="所谓增量变更就是小步提交和持续集成/部署吗？"></a>所谓增量变更就是小步提交和持续集成/部署吗？</h3><p>按照几位作者的定义，增量变更包含两方面，增量构建软件和部署。而在第一章第二节的寥寥数语中可得知，小步提交，持续集成等实践都是做增量变更的基础，而增量变更有开发级别的（如：小步提交），部署级别的（如：蓝绿部署），甚至还有架构级别的。<br>在开发方面，可测试是一个基础要素，有了它，才可以通过下面将要提到的适应度函数保障每次提交，构建出的代码在不破坏架构特征（规范）的前提下，对系统进行增量修改。<br>而在构建上采用持续交付/部署流水线又可以在系统执行变更时自动化适应度函数的执行与校验。</p>
-<h3 id="引导性变更是说变更更具引导性吗？如果是，那么是哪种变更？"><a href="#引导性变更是说变更更具引导性吗？如果是，那么是哪种变更？" class="headerlink" title="引导性变更是说变更更具引导性吗？如果是，那么是哪种变更？"></a>引导性变更是说变更更具引导性吗？如果是，那么是哪种变更？</h3><p>不知道是否为中西方语言文化差异，还是本人理解有误，初次听闻 <strong>“引导性变更”</strong> 一词，我的第一反应是 <strong>“该变更更具引导性，而不是其他特性”</strong>（主体为“变更”），而在我仔细阅读了此标题下的正文之后发现，其实是在作者引出了 <strong>“适应度函数”</strong> 这个概念后，表示是此“函数”（而非“变更”）可以引导相关的变更更加适应业务和技术环境的变化。</p>
-<h3 id="适应度函数就是各种各样的测试么？"><a href="#适应度函数就是各种各样的测试么？" class="headerlink" title="适应度函数就是各种各样的测试么？"></a>适应度函数就是各种各样的测试么？</h3><p>适应度函数这个概念本身来源于遗传学中，具体可参考维基百科，这里不再详细赘述。而放在软件架中，简单来说，适应度函数有很多种，单元测试，E2E测试，契约测试等都只是一种基本的表现形式。由本书第二章可知，除了各种测试，还有一系列监控，代码坏味道的报告，甚至代码风格的checkstyle等。所以这里的<strong>“适应度函数”</strong>只是一个“接口”（抽象概念），凡是可以验证架构特征的“功能”都被称为<strong>适应度函数</strong>。</p>
-<h3 id="为什么由ESB驱动的SOA不适合构建架构适应度函数？进而致使其架构演进的能力弱"><a href="#为什么由ESB驱动的SOA不适合构建架构适应度函数？进而致使其架构演进的能力弱" class="headerlink" title="为什么由ESB驱动的SOA不适合构建架构适应度函数？进而致使其架构演进的能力弱"></a>为什么由ESB驱动的SOA不适合构建架构适应度函数？进而致使其架构演进的能力弱</h3><p>本人其实没有真正接触过基于ESB的面向服务架构，但这一点却和本书作者有些不同看法。首先在这种架构中，ESB起到的作用有时会像 <strong>“流程编排”</strong>，整个业务流会需要 ESB 组件去调度，否则则产生不了业务价值。而原子适应度函数是针对于单一的上下文，也就是架构量子去执行。在这一点上基于ESB的SOA的能力应该是和微服务是一致的。也就是说，个人并不同意书中所说的 <strong>“为其构建原子适应度函数几乎不可能”</strong>。倒是对于整体适应度函数而言，由于基于 ESB 的 SOA 并不像微服务那样，基于一系列合理的方法论所划分处理出的限界上下文进而划分服务，所以这种架构模式需要整体适应度函数来保证业务价值和架构特性的几率也许确实要比微服务高很多。</p>
-<h3 id="防腐层之于架构演进能力的意义"><a href="#防腐层之于架构演进能力的意义" class="headerlink" title="防腐层之于架构演进能力的意义"></a>防腐层之于架构演进能力的意义</h3><p>即便不是经常接触DDD或整洁架构的同学我想对于 <strong>防腐层（Anti-corruption Layer）</strong>的概念也并不陌生。简单说就是防腐层架构模式是一种保护措施，使用抽象隔离了第三方类库或集成方的具体实现。这样做的好处有很多，其中之一是避免了业务逻辑与外部系统SDK的实现有所耦合，让架构师（实际上是每个开发人员）控制关于外部系统的耦合点。由于第三方系统默认是很不稳定的，所以架构师（实际上是每个开发人员）需要考虑后期一旦有所以变动如何将修改成本降至最低，也就是对 <strong>“增量修改”</strong> 更加友好。还有一点是我很喜欢的说法是对于这种架构策略，可以使得开发人员思考他们从这些耦合点的另一边获得的是哪种能力，而不是那些 SDK/API 的特定语法。</p>
-<h3 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h3><ul>
-<li><a href="https://book.douban.com/subject/34793521/" target="_blank" rel="noopener">《演进式架构》</a>          —— By [美] 尼尔 • 福特 / [美] 丽贝卡 • 帕森斯 / [澳] 帕特里克 • 柯</li>
-<li><a href="https://zhuanlan.zhihu.com/p/86097675" target="_blank" rel="noopener">构建质量可信系统的 10 要素</a>   —— By phodal</li>
-</ul>
-<p>(未完待续…)</p>
-
+        
+          <p class="article-more-link">
+            <a href="/2020/02/03/%E6%B5%85%E8%B0%88%E6%BC%94%E8%BF%9B%E5%BC%8F%E6%9E%B6%E6%9E%84(%E4%B8%80)/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/02/03/%E6%B5%85%E8%B0%88%E6%BC%94%E8%BF%9B%E5%BC%8F%E6%9E%B6%E6%9E%84(%E4%B8%80)/" data-id="ck6617k8000006xtq2p7k9n16" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/02/03/%E6%B5%85%E8%B0%88%E6%BC%94%E8%BF%9B%E5%BC%8F%E6%9E%B6%E6%9E%84(%E4%B8%80)/" data-id="ck6623h4r0003rjtq8n2mhjzn" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Generator-of-python" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/04/19/Generator-of-python/" class="article-date">
+  <time datetime="2016-04-19T13:42:39.000Z" itemprop="datePublished">2016-04-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/19/Generator-of-python/">Generator of Python</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>近日，趁着找工作的间隙，了解了一下Python中一直让我不解的generator。现在特此写一篇博客记录下来自己的理解，也好让自己理解的透彻一点吧。</p>
+<h5 id="环境：Python3-4"><a href="#环境：Python3-4" class="headerlink" title="环境：Python3.4"></a>环境：Python3.4</h5>
+        
+          <p class="article-more-link">
+            <a href="/2016/04/19/Generator-of-python/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/04/19/Generator-of-python/" data-id="ck6623h4k0000rjtq6b6q8hod" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-对python高阶函数的一些理解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/03/23/%E5%AF%B9python%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3/" class="article-date">
+  <time datetime="2016-03-23T00:59:16.000Z" itemprop="datePublished">2016-03-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/23/%E5%AF%B9python%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3/">对Python高阶函数的一些理解</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本人是一名Java程序员，在最近学习python的过程中，因为思维惯性和没有认真理解python的概念，导致很多例子混淆。现在写下这篇笔记，让自己以后在回头看看的时候也有个参考。LoL。。。。。</p>
+<h5 id="Python版本：3-4-3"><a href="#Python版本：3-4-3" class="headerlink" title="Python版本：3.4.3"></a>Python版本：3.4.3</h5><h5 id="Python交互环境：ipython"><a href="#Python交互环境：ipython" class="headerlink" title="Python交互环境：ipython"></a>Python交互环境：ipython</h5><h5 id="环境：Ubuntu14-04-LTS"><a href="#环境：Ubuntu14-04-LTS" class="headerlink" title="环境：Ubuntu14.04 LTS"></a>环境：Ubuntu14.04 LTS</h5>
+        
+          <p class="article-more-link">
+            <a href="/2016/03/23/%E5%AF%B9python%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/03/23/%E5%AF%B9python%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3/" data-id="ck6623h4s0004rjtq3ggs1it1" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-浅谈MyEclipse和Idea中Tomcat的部署方式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/12/08/%E6%B5%85%E8%B0%88MyEclipse%E5%92%8CIdea%E4%B8%ADTomcat%E7%9A%84%E9%83%A8%E7%BD%B2%E6%96%B9%E5%BC%8F/" class="article-date">
+  <time datetime="2015-12-08T10:40:44.000Z" itemprop="datePublished">2015-12-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/08/%E6%B5%85%E8%B0%88MyEclipse%E5%92%8CIdea%E4%B8%ADTomcat%E7%9A%84%E9%83%A8%E7%BD%B2%E6%96%B9%E5%BC%8F/">浅谈MyEclipse和Idea中Tomcat的部署方式以及在项目中设置上下文的相关</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>年底终于可以在繁重的开发任务上喘一口气，决定用一些新东西来重构老项目。有些平时没有追究的细节问题在一个人开发时，由于没有了别人的参考，被坑的还是很惨的，现在特此记录下来，希望给同样有疑惑的人一个参考吧。</p>
+<h5 id="开发工具：IDEA14-Tomcat7（其他的和本文无太大关系，故不介绍…-）"><a href="#开发工具：IDEA14-Tomcat7（其他的和本文无太大关系，故不介绍…-）" class="headerlink" title="开发工具：IDEA14 +Tomcat7（其他的和本文无太大关系，故不介绍….）"></a>开发工具：IDEA14 +Tomcat7（其他的和本文无太大关系，故不介绍….）</h5><h5 id="开发环境：struts2（其他的和本文无关，故不介绍）"><a href="#开发环境：struts2（其他的和本文无关，故不介绍）" class="headerlink" title="开发环境：struts2（其他的和本文无关，故不介绍）"></a>开发环境：struts2（其他的和本文无关，故不介绍）</h5><p>（看本文前如果有不知道Tomcat几种部署方式的请自行谷歌。）</p>
+        
+          <p class="article-more-link">
+            <a href="/2015/12/08/%E6%B5%85%E8%B0%88MyEclipse%E5%92%8CIdea%E4%B8%ADTomcat%E7%9A%84%E9%83%A8%E7%BD%B2%E6%96%B9%E5%BC%8F/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/12/08/%E6%B5%85%E8%B0%88MyEclipse%E5%92%8CIdea%E4%B8%ADTomcat%E7%9A%84%E9%83%A8%E7%BD%B2%E6%96%B9%E5%BC%8F/" data-id="ck6623h4q0002rjtqb1rj9ly4" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-折腾Octopress的一点心得" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/11/20/%E6%8A%98%E8%85%BEOctopress%E7%9A%84%E4%B8%80%E7%82%B9%E5%BF%83%E5%BE%97/" class="article-date">
+  <time datetime="2015-11-20T08:51:05.000Z" itemprop="datePublished">2015-11-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/20/%E6%8A%98%E8%85%BEOctopress%E7%9A%84%E4%B8%80%E7%82%B9%E5%BF%83%E5%BE%97/">折腾Octopress的一点心得</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>折腾这款博客框架已经来来回回有一个多月了，网上的“教程”鱼龙混杂，以至于其中走了不少弯路（其实也让我对Ruby和Git的一些机制产生更加深刻的理解）。趁着这次出差事情不多，粗略的记录一下安装过程以及详细的爬坑过程吧。</p>
+<h5 id="环境：Ubuntu14-04-LTS"><a href="#环境：Ubuntu14-04-LTS" class="headerlink" title="环境：Ubuntu14.04 LTS"></a>环境：Ubuntu14.04 LTS</h5><h5 id="Ruby版本：1-9-3（官方推荐的是1-9-2，但是小版本的变动应该无伤大雅，至少在这个项目上暂时没发现什么坑）"><a href="#Ruby版本：1-9-3（官方推荐的是1-9-2，但是小版本的变动应该无伤大雅，至少在这个项目上暂时没发现什么坑）" class="headerlink" title="Ruby版本：1.9.3（官方推荐的是1.9.2，但是小版本的变动应该无伤大雅，至少在这个项目上暂时没发现什么坑）"></a>Ruby版本：1.9.3（官方推荐的是1.9.2，但是小版本的变动应该无伤大雅，至少在这个项目上暂时没发现什么坑）</h5><h5 id="Gem版本：2-4-8"><a href="#Gem版本：2-4-8" class="headerlink" title="Gem版本：2.4.8"></a>Gem版本：2.4.8</h5><h5 id="Git版本：1-9-1"><a href="#Git版本：1-9-1" class="headerlink" title="Git版本：1.9.1"></a>Git版本：1.9.1</h5>
+        
+          <p class="article-more-link">
+            <a href="/2015/11/20/%E6%8A%98%E8%85%BEOctopress%E7%9A%84%E4%B8%80%E7%82%B9%E5%BF%83%E5%BE%97/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/11/20/%E6%8A%98%E8%85%BEOctopress%E7%9A%84%E4%B8%80%E7%82%B9%E5%BF%83%E5%BE%97/" data-id="ck6623h4o0001rjtq8pwp002u" class="article-share-link">Share</a>
       
       
     </footer>
@@ -137,7 +295,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li></ul>
     </div>
   </div>
 
@@ -153,6 +311,22 @@
             <a href="/2020/02/03/%E6%B5%85%E8%B0%88%E6%BC%94%E8%BF%9B%E5%BC%8F%E6%9E%B6%E6%9E%84(%E4%B8%80)/">浅谈演进式架构(一)</a>
           </li>
         
+          <li>
+            <a href="/2016/04/19/Generator-of-python/">Generator of Python</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/23/%E5%AF%B9python%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3/">对Python高阶函数的一些理解</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/08/%E6%B5%85%E8%B0%88MyEclipse%E5%92%8CIdea%E4%B8%ADTomcat%E7%9A%84%E9%83%A8%E7%BD%B2%E6%96%B9%E5%BC%8F/">浅谈MyEclipse和Idea中Tomcat的部署方式以及在项目中设置上下文的相关</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/20/%E6%8A%98%E8%85%BEOctopress%E7%9A%84%E4%B8%80%E7%82%B9%E5%BF%83%E5%BE%97/">折腾Octopress的一点心得</a>
+          </li>
+        
       </ul>
     </div>
   </div>
@@ -165,7 +339,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2020 John Doe<br>
+      &copy; 2020 hbzhu<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

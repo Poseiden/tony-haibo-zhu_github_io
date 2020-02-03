@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>对Python高阶函数的一些理解 | 朱海波的个人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="本人是一名Java程序员，在最近学习python的过程中，因为思维惯性和没有认真理解python的概念，导致很多例子混淆。现在写下这篇笔记，让自己以后在回头看看的时候也有个参考。LoL。。。。。 Python版本：3.4.3Python交互环境：ipython环境：Ubuntu14.04 LTS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="对Python高阶函数的一些理解">
+<meta property="og:url" content="http://yoursite.com/2016/03/23/%E5%AF%B9python%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3/index.html">
+<meta property="og:site_name" content="朱海波的个人博客">
+<meta property="og:description" content="本人是一名Java程序员，在最近学习python的过程中，因为思维惯性和没有认真理解python的概念，导致很多例子混淆。现在写下这篇笔记，让自己以后在回头看看的时候也有个参考。LoL。。。。。 Python版本：3.4.3Python交互环境：ipython环境：Ubuntu14.04 LTS">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2016-03-23T00:59:16.000Z">
+<meta property="article:modified_time" content="2020-02-03T06:10:56.179Z">
+<meta property="article:author" content="hbzhu">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="朱海波的个人博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">朱海波的个人博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-对python高阶函数的一些理解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/03/23/%E5%AF%B9python%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3/" class="article-date">
+  <time datetime="2016-03-23T00:59:16.000Z" itemprop="datePublished">2016-03-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      对Python高阶函数的一些理解
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本人是一名Java程序员，在最近学习python的过程中，因为思维惯性和没有认真理解python的概念，导致很多例子混淆。现在写下这篇笔记，让自己以后在回头看看的时候也有个参考。LoL。。。。。</p>
+<h5 id="Python版本：3-4-3"><a href="#Python版本：3-4-3" class="headerlink" title="Python版本：3.4.3"></a>Python版本：3.4.3</h5><h5 id="Python交互环境：ipython"><a href="#Python交互环境：ipython" class="headerlink" title="Python交互环境：ipython"></a>Python交互环境：ipython</h5><h5 id="环境：Ubuntu14-04-LTS"><a href="#环境：Ubuntu14-04-LTS" class="headerlink" title="环境：Ubuntu14.04 LTS"></a>环境：Ubuntu14.04 LTS</h5><a id="more"></a>
+
+<p>首先，在Python这种解释型语言中，要搞明白函数，和函数调用的区别。例如，在python中有一个内置的求绝对值的函数“abs”。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">In[1]: abs</span><br><span class="line">Out[2]:&lt;function abs&gt;</span><br><span class="line"></span><br><span class="line">In[2]:abs()</span><br><span class="line">---------------------------------------------------------------------------</span><br><span class="line"> TypeError                                 Traceback (most recent call last)</span><br><span class="line"> &lt;ipython-input-3-3a546e8778c7&gt; in &lt;module&gt;()</span><br><span class="line"> ----&gt; 1 abs()</span><br><span class="line"></span><br><span class="line"> TypeError: abs() takes exactly one argument (0 given)</span><br></pre></td></tr></table></figure>
+<p>以上例子中，在输入<code>abs</code>时，交互环境表示这是一个function,而在输入<code>abs()</code>时,交互环境报错，提示应该传入一个参数但是实际给了0个（这个翻译有点蹩脚）。这里就说明在输入<code>abs()</code>时，实际上已经调用了abs()函数，而不是仅仅表示这个函数。Ok，在讲清楚了这点之后，后面就好理解了。</p>
+<p>在python中，变量可以指向函数，也就是用变量代表函数，而在Java中，这个是不可以的。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">In[2]: f &#x3D; abs</span><br><span class="line"></span><br><span class="line">In[3]: f</span><br><span class="line">Out[3]: &lt;function abs&gt; </span><br><span class="line"></span><br><span class="line">In[4]: f(-1)</span><br><span class="line">Out[4]:1</span><br></pre></td></tr></table></figure>
+<p>在上面的例子中，在将f指向abs函数后，可以通过f()的方式同样调用abs()函数。</p>
+<p>这些只是高阶函数的冰山一角，高阶函数的特性还允许将函数作为参数传入另一个函数，和把一个函数作为返回值返回，闭包等等。时间有限，暂且不表，在以后的笔记中再介绍吧。</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p>最后，推荐一个很好的学习python的网站。</p>
+<ul>
+<li><a href="http://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/0014317849054170d563b13f0fa4ce6ba1cd86e18103f28000" target="_blank" rel="noopener">廖雪峰的python3教程-高阶函数</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/03/23/%E5%AF%B9python%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3/" data-id="ck6623h4s0004rjtq3ggs1it1" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/04/19/Generator-of-python/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Generator of Python
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/12/08/%E6%B5%85%E8%B0%88MyEclipse%E5%92%8CIdea%E4%B8%ADTomcat%E7%9A%84%E9%83%A8%E7%BD%B2%E6%96%B9%E5%BC%8F/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">浅谈MyEclipse和Idea中Tomcat的部署方式以及在项目中设置上下文的相关</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/02/03/%E6%B5%85%E8%B0%88%E6%BC%94%E8%BF%9B%E5%BC%8F%E6%9E%B6%E6%9E%84(%E4%B8%80)/">浅谈演进式架构(一)</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/19/Generator-of-python/">Generator of Python</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/23/%E5%AF%B9python%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3/">对Python高阶函数的一些理解</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/08/%E6%B5%85%E8%B0%88MyEclipse%E5%92%8CIdea%E4%B8%ADTomcat%E7%9A%84%E9%83%A8%E7%BD%B2%E6%96%B9%E5%BC%8F/">浅谈MyEclipse和Idea中Tomcat的部署方式以及在项目中设置上下文的相关</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/20/%E6%8A%98%E8%85%BEOctopress%E7%9A%84%E4%B8%80%E7%82%B9%E5%BF%83%E5%BE%97/">折腾Octopress的一点心得</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 hbzhu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
